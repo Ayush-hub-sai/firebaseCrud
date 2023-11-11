@@ -17,7 +17,7 @@ export class DataService {
     return this.firestore.collection('/Student').add(student)
   }
 
-  getAllStudents() {
+  getAllStudents(): Observable<any[]> {
     return this.firestore.collection('/Student').snapshotChanges()
   }
 
@@ -34,9 +34,4 @@ export class DataService {
     return studentRef.update(updatedData);
   }
 
-  searchStudents(query: string): Observable<Student[]> {
-    return this.firestore.collection<Student>('Student', ref => ref.where('first_name', '>=', query).where('first_name', '<=', query + '\uf8ff'))
-      .valueChanges();
-  }
- 
 }

@@ -30,16 +30,12 @@ export class DashboardComponent implements OnInit {
     mobile: ''
   }
 
+  searchQuery = ''
+  staticStudent: any = []
+
   constructor(private _authService: AuthService, private _dataService: DataService) { }
-  private searchSubject = new Subject<string>();
   ngOnInit(): void {
     this.getAllStudent()
-  }
-
-  searchQuery = ''
-  search() {
-    console.log(this.searchQuery);
-
   }
 
   getAllStudent() {
@@ -49,9 +45,20 @@ export class DashboardComponent implements OnInit {
         data.id = e.payload.doc.id;
         return data;
       })
+      this.staticStudent = this.studentList
     }, err => {
       alert("Error while fetching the data")
     })
+  }
+
+  search() {
+    if (this.searchQuery === '') {
+      this.studentList = this.staticStudent;
+    } else {
+      this.studentList = this.staticStudent.filter(student =>
+        student.first_name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
   }
 
   addStudent() {
@@ -101,10 +108,10 @@ export class DashboardComponent implements OnInit {
       last_name: this.last_name,
       mobile: this.mobile
     }
-
+    // this._dataService.updateStudent(studentId, this.updateItem)
     this._dataService.updateStudent(studentId, this.updateItem)
       .then(() => {
-        console.log('Student updated successfully');
+        alert('Student updated successfully');
       })
       .catch((error) => {
         console.error('Error updating student:', error);
