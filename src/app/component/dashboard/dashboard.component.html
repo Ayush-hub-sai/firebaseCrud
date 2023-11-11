@@ -42,12 +42,9 @@
         <h5 class="text-danger text-center"> Student List</h5>
         <div class="d-flex justify-content-end">
           <div class="row">
-            <div class="col-lg-8">
-              <input type="search" class="form-control" [(ngModel)]="searchQuery" placeholder="Search by name">&nbsp;
+            <div class="col">
+              <input type="search" class="form-control" (keyup)="search()" [(ngModel)]="searchQuery" placeholder="Search by name">&nbsp;
             </div>
-            <!-- <div class="col-lg-4">
-              <button (click)="search(searchQuery)" type="button" class=" btn btn-outline-warning">Search</button>
-            </div> -->
           </div>
         </div>
 

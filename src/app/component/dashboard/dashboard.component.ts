@@ -34,33 +34,13 @@ export class DashboardComponent implements OnInit {
   private searchSubject = new Subject<string>();
   ngOnInit(): void {
     this.getAllStudent()
-
-    // this.studentList = this.searchSubject.pipe(
-    //   debounceTime(300), // Adjust the debounce time as needed
-    //   distinctUntilChanged(),
-    //   switchMap(query => {
-    //     if (query.trim() !== '') {
-    //       return this._dataService.searchStudents(query);
-    //     } else {
-    //       return this._dataService.getStudents();
-    //     }
-    //   })
-    // );
-  }
-
-  search(query: string): void {
-    this.searchSubject.next(query);
   }
 
   searchQuery = ''
-  // search(query: string): void {
-  //   if (query.trim() !== '') {
-  //     this._dataService.searchStudents(query).subscribe((res: any) => {
-  //       this.studentList = res
-  //     })
-  //   }
-  // }
+  search() {
+    console.log(this.searchQuery);
 
+  }
 
   getAllStudent() {
     this._dataService.getAllStudents().subscribe((res: any) => {
@@ -144,6 +124,6 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  
+
 
 }
