@@ -29,7 +29,7 @@
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile" [(ngModel)]="mobile">
-          <label for="mobile">Password</label>
+          <label for="mobile">Mobile</label>
         </div>
         <button *ngIf="!editItem" type="button" class=" btn btn-outline-success" (click)="addStudent()">Add
           Student</button>
@@ -62,7 +62,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Mobile</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
