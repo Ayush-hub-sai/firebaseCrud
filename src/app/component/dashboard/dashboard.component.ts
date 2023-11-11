@@ -3,7 +3,6 @@ import { Observable, Subject } from 'rxjs';
 import { Student } from 'src/app/model/student';
 import { AuthService } from 'src/app/shared/auth.service';
 import { DataService } from 'src/app/shared/data.service';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,7 +11,6 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 export class DashboardComponent implements OnInit {
   studentList: Student[] = []
 
-  // studentList$?: Observable<Student[]>;
   id: string = ''
   first_name: string = ''
   last_name: string = ''
@@ -130,7 +128,9 @@ export class DashboardComponent implements OnInit {
     this.resetForm()
   }
 
-
+  exit(){
+    this._authService.signOut()
+  }
 
 
 }
