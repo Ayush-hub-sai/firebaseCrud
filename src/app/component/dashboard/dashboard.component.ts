@@ -98,6 +98,10 @@ export class DashboardComponent implements OnInit {
   }
 
   EditStudent(): void {
+    if (this.first_name == '' || this.last_name == '' || this.email == '' || this.mobile == '') {
+      alert("Please fill all input fields")
+      return
+    }
     const studentId = this.id;
 
     this.updateItem = {
