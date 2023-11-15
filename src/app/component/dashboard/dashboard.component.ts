@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Student } from 'src/app/model/student';
 import { AuthService } from 'src/app/shared/auth.service';
 import { DataService } from 'src/app/shared/data.service';
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -30,6 +32,8 @@ export class DashboardComponent implements OnInit {
 
   searchQuery = ''
   staticStudent: any = []
+
+  @ViewChild('userTable') userTable: ElementRef;
 
   constructor(private _authService: AuthService, private _dataService: DataService) { }
   ngOnInit(): void {
@@ -132,9 +136,12 @@ export class DashboardComponent implements OnInit {
     this.resetForm()
   }
 
-  exit(){
+  exit() {
     this._authService.signOut()
   }
 
+  exportexcel(): void {
+    this._dataService.exportTableElmToExcel(this.userTable, 'student data',this.studentList);
+  }
 
 }

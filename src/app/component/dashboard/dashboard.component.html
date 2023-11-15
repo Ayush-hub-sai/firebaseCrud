@@ -10,7 +10,6 @@
         <div class="form-floating mb-3 text-center">
           <h5 *ngIf="!editItem" class="text-center text-warning">Add Student</h5>
           <h5 *ngIf="editItem" class="text-center text-warning">Update Student</h5>
-
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Your First Name"
@@ -44,8 +43,11 @@
 
     <div class="col-md-8 mt-5">
       <div class="card p-3 shadow">
-        <h5 class="text-danger text-center"> Student List</h5>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-between">
+          <h5 class="text-danger text-center"> Student List</h5>
+          <button (click)="exportexcel()" type="button" class="btn btn-md btn-outline-primary">Export</button>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
           <div class="row">
             <div class="col">
               <input type="text" class="form-control" (keyup)="search()" [(ngModel)]="searchQuery"
@@ -55,7 +57,7 @@
         </div>
 
         <div class="card-body">
-          <table class="table table-hover">
+          <table class="table table-hover" #userTable>
             <thead>
               <tr>
                 <th scope="col">First Name</th>

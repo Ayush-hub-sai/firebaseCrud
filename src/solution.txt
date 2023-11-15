@@ -1,0 +1,32 @@
+export table to excel
+----------------------------
+1# --installing xlsx package
+    $ npm install xlsx
+2# --installing file-saver - a solution to saving files on the client-side
+    $ npm install file-saver
+3   -- <table class="table table-sm" #userTable>
+4   -- ts
+        @ViewChild('userTable') userTable: ElementRef;
+         exportElmToExcel(): void {
+        this.exportService.exportTableElmToExcel(this.userTable, 'user_data');
+        }
+5   -- service
+            public exportTableElmToExcel(element: ElementRef, fileName: string, studentList: any): void {
+            // Clone the studentList to avoid modifying the original data
+            const studentListWithoutAction = studentList.map((student) => {
+            const { action, ...studentWithoutAction } = student;
+            return studentWithoutAction;
+            });
+
+            const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(studentListWithoutAction);
+
+            // generate workbook and add the worksheet
+            const workbook: XLSX.WorkBook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, ws, 'Sheet1');
+
+            let timeSpan = new Date().toISOString();
+            fileName = `${fileName}-${timeSpan}`;
+
+            // save to file
+            XLSX.writeFile(workbook, `${fileName}${EXCEL_EXTENSION}`);
+        }
